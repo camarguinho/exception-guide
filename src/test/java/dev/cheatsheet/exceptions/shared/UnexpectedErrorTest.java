@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
+import dev.cheatsheet.exceptions.order.OrderErrorCode;
+import dev.cheatsheet.exceptions.shared.error.NotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -54,6 +57,25 @@ class UnexpectedErrorTest {
                 .andExpect(jsonPath("$.correlationId").exists());
     }
 
+    @Test
+    void excecaoComResponseStatus_naoViraQuinhentos() throws Exception {
+        mvc.perform(get("/test-support/legacy"))
+                .andExpect(status().isPaymentRequired())
+                .andExpect(jsonPath("$.detail").value("Assinatura expirada"))
+                .andExpect(jsonPath("$.correlationId").exists());
+    }
+
+    @Test
+    void excecaoDaAplicacaoEmbrulhada_eTratadaPelaCausa() throws Exception {
+        mvc.perform(get("/test-support/wrapped"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("ORDER_NOT_FOUND"));
+    }
+
+    @ResponseStatus(code = HttpStatus.PAYMENT_REQUIRED, reason = "Assinatura expirada")
+    static class LegacySubscriptionException extends RuntimeException {
+    }
+
     @TestConfiguration
     static class FailingEndpoints {
         @Bean
@@ -72,6 +94,18 @@ class UnexpectedErrorTest {
         @GetMapping("/test-support/invariant")
         String invariant() {
             throw new IllegalArgumentException("quantity deve ser positiva: 0");
+        }
+
+        @GetMapping("/test-support/legacy")
+        String legacy() {
+            throw new LegacySubscriptionException();
+        }
+
+        @GetMapping("/test-support/wrapped")
+        String wrapped() {
+            // ex.: CompletableFuture.join() embrulha a exceção original em CompletionException
+            throw new java.util.concurrent.CompletionException(
+                    new NotFoundException(OrderErrorCode.ORDER_NOT_FOUND, "42"));
         }
 
         @GetMapping("/test-support/gone")

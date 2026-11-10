@@ -9,6 +9,7 @@ import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.method.ParameterErrors;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
@@ -94,6 +96,28 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     ResponseEntity<ProblemDetail> handleUnexpected(Exception ex) {
+        // Um catch-all casa com tudo, então desliga o casamento por causa do Spring (ver P10).
+        // Ex.: CompletionException(NotFoundException) viraria 500. Procuramos a causa à mão.
+        ApplicationException wrapped = findCause(ex, ApplicationException.class);
+        if (wrapped != null) {
+            return handleApplicationException(wrapped);
+        }
+
+        // Um catch-all também roda antes do ResponseStatusExceptionResolver (ver P09):
+        // sem isto, exceções anotadas com @ResponseStatus (comuns em libs/legado) virariam 500.
+        ResponseStatus annotated = AnnotatedElementUtils.findMergedAnnotation(ex.getClass(), ResponseStatus.class);
+        if (annotated != null) {
+            HttpStatus status = annotated.code();
+            ProblemDetail problem = ProblemDetail.forStatus(status);
+            if (!annotated.reason().isBlank()) {
+                problem.setDetail(annotated.reason());
+            }
+            String code = ProtocolErrorCodes.forStatus(status);
+            enrich(problem, code);
+            logException(ex, status, code);
+            return ResponseEntity.status(status).body(problem);
+        }
+
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         ProblemDetail problem = problemFor(status, CommonErrorCode.INTERNAL_ERROR,
                 CommonErrorCode.INTERNAL_ERROR.messageTemplate());
@@ -174,6 +198,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         if (correlationId != null) {
             problem.setProperty("correlationId", correlationId);
         }
+    }
+
+    private static <T extends Throwable> @Nullable T findCause(Throwable ex, Class<T> type) {
+        for (Throwable t = ex.getCause(); t != null && t != ex; t = t.getCause()) {
+            if (type.isInstance(t)) {
+                return type.cast(t);
+            }
+        }
+        return null;
     }
 
     private static FieldViolation toViolation(FieldError error) {

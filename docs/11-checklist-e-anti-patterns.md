@@ -1,6 +1,6 @@
 # 11 — Checklist, anti-patterns e mapa do projeto
 
-[← Testando erros](10-testando-erros.md) · [Índice](README.md)
+[← Testando erros](10-testando-erros.md) · [Índice](README.md) · [Próximo: Catálogo de patterns →](12-catalogo-de-patterns.md)
 
 ---
 
@@ -36,6 +36,8 @@
 - [ ] Handlers específicos para `AccessDeniedException`/`AuthenticationException` se houver method security.
 - [ ] `server.error.include-*` configurado para não vazar.
 - [ ] `@Transactional` com checked exception tem `rollbackFor`.
+- [ ] O catch-all respeita `@ResponseStatus` e procura exceções da aplicação na causa ([cap. 12](12-catalogo-de-patterns.md#122-como-o-spring-decide-o-modelo-mental-para-ensinar)).
+- [ ] `@Order` explícito quando há mais de um advice.
 
 **Resposta**
 - [ ] `application/problem+json` em **todos** os erros (inclusive 404 de rota e 405).
@@ -88,6 +90,7 @@
 | Tradução de exceções de terceiros | [`payment/SdkPaymentGateway.java`](../src/main/java/dev/cheatsheet/exceptions/payment/SdkPaymentGateway.java) |
 | Invariantes de domínio | [`order/Order.java`](../src/main/java/dev/cheatsheet/exceptions/order/Order.java), [`order/OrderItem.java`](../src/main/java/dev/cheatsheet/exceptions/order/OrderItem.java) |
 | Service sem try/catch | [`order/OrderService.java`](../src/main/java/dev/cheatsheet/exceptions/order/OrderService.java) |
+| Catálogo executável dos padrões de exception handler | [`src/test/java/dev/cheatsheet/patterns/`](../src/test/java/dev/cheatsheet/patterns/) |
 | Validação na borda | [`order/OrderDtos.java`](../src/main/java/dev/cheatsheet/exceptions/order/OrderDtos.java) |
 
 ## 11.4 Leituras

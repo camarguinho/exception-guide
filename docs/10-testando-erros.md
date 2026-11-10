@@ -93,7 +93,21 @@ class UnexpectedErrorTest {
 }
 ```
 
-## 10.7 Limites do MockMvc
+## 10.7 Testando um padrão isolado: `standaloneSetup`
+
+Para estudar ou ensinar um mecanismo sem subir a aplicação inteira, monte só o controller e o
+advice. É assim que o [catálogo de patterns](12-catalogo-de-patterns.md) é escrito:
+
+```java
+MockMvc mvc = MockMvcBuilders.standaloneSetup(new ProductController())
+        .setControllerAdvice(new ProblemAdvice())
+        .build();
+```
+
+Rápido (milissegundos) e sem interferência de outros beans. Para o contrato **real** da aplicação,
+continue usando `@SpringBootTest` + `@AutoConfigureMockMvc`.
+
+## 10.8 Limites do MockMvc
 
 - MockMvc **não** faz o forward para `/error` do container. Erros em filters/`BasicErrorController`
   precisam de teste com servidor real (`@SpringBootTest(webEnvironment = RANDOM_PORT)`).

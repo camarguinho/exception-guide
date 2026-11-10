@@ -1,8 +1,12 @@
 # exception-guide
 
-Guia + projeto de referência (Java 21 · Spring Boot 4 · Maven) sobre **exceções, error codes e HTTP status**
-em APIs Spring. O ebook explicativo está em **[`docs/`](docs/README.md)**; cada capítulo aponta para
-o código daqui.
+Guia + projeto de referência (Java 21 · Spring Boot 4 · Maven) sobre **exception handling em
+aplicações Spring Boot**: os padrões de mercado, as boas práticas, error codes e HTTP status.
+
+- 📘 **Ebook:** [`docs/`](docs/README.md), em 12 capítulos, cada um apontando para o código daqui.
+- 🧩 **Catálogo de patterns:** [`src/test/java/dev/cheatsheet/patterns`](src/test/java/dev/cheatsheet/patterns/),
+  com 13 formas de tratar exceções no Spring, cada uma como teste executável e isolado ([cap. 12](docs/12-catalogo-de-patterns.md)).
+- 🎓 **Material de ensino:** [`docs/ensino/`](docs/ensino/README.md), com workshop, demos, exercícios com gabarito, kata, quiz e ADR.
 
 ## O que o projeto demonstra
 
@@ -13,12 +17,14 @@ o código daqui.
 - Validação em três camadas (borda → 400, domínio → 500 se escapar, regra de negócio → 422/409).
 - Tradução de exceções de um SDK de terceiro (502/503/504, `Retry-After`, `retryable`), com causa preservada.
 - Correlation ID no MDC, no header e no corpo; política de log por categoria.
-- Testes de contrato para cada cenário de erro (46 testes).
+- Catch-all seguro: respeita `@ResponseStatus` e encontra exceções da aplicação embrulhadas na causa.
+- Testes de contrato para cada cenário de erro, mais o catálogo de patterns (78 testes).
 
 ## Rodando
 
 ```bash
 mvn test                 # roda os testes
+mvn test -Dtest='P*Test' # só o catálogo de patterns
 mvn spring-boot:run      # sobe em http://localhost:8080
 ```
 
@@ -68,5 +74,7 @@ src/main/java/dev/cheatsheet/exceptions
 ├── order          ← contexto de pedidos: domínio, service, controller, OrderErrorCode
 └── payment        ← porta PaymentGateway, adaptador que traduz o SDK, PaymentErrorCode
     └── sdk        ← "SDK de terceiro" fake com exceção checked própria
+src/test/java/dev/cheatsheet/patterns   ← catálogo executável P01–P13
 docs/              ← o ebook
+docs/ensino/       ← material para conduzir workshop
 ```

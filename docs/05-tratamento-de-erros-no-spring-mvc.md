@@ -153,6 +153,13 @@ ResponseEntity<ProblemDetail> forbidden(AccessDeniedException ex) { /* 403, code
 ResponseEntity<ProblemDetail> unauthenticated(AuthenticationException ex) { /* 401 */ }
 ```
 
+### E o `@ResponseStatus` e a causa?
+
+O mesmo catch-all tem mais dois efeitos colaterais, demonstrados no [catálogo de patterns](12-catalogo-de-patterns.md):
+exceções anotadas com `@ResponseStatus` viram 500 (P09), e uma exceção da aplicação **embrulhada**
+(ex.: em `CompletionException`) não é mais encontrada pela causa (P10). O `GlobalExceptionHandler`
+do projeto trata os dois casos no `handleUnexpected`.
+
 ## 5.4 `ErrorResponse` e `ErrorResponseException` (Spring 6+)
 
 O Spring 6 introduziu `ErrorResponse`: um contrato para exceções que **sabem** virar resposta HTTP

@@ -38,12 +38,20 @@ modelo de erro **consistente, seguro e operável**, e conseguir defender cada de
 | 09 | [Logging e observabilidade](09-logging-e-observabilidade.md) | Logar uma vez, níveis, correlation id, métricas |
 | 10 | [Testando erros](10-testando-erros.md) | Testes de contrato, testes negativos, MockMvc |
 | 11 | [Checklist e anti-patterns](11-checklist-e-anti-patterns.md) | Checklist de review e mapa conceito → código |
+| 12 | [**Catálogo de patterns de exception handler**](12-catalogo-de-patterns.md) | Os 13 padrões do Spring Boot, do try/catch ao `ResponseEntityExceptionHandler`, cada um como teste executável |
+
+## 🎓 Para quem vai ensinar e liderar
+
+O [material de ensino](ensino/README.md) traz: plano de workshop (3 encontros), roteiro de demos ao
+vivo, 10 exercícios com gabarito, kata de refatoração, quiz, respostas para as objeções do time e um
+ADR pronto para adotar o padrão.
 
 ## Respostas rápidas
 
 **Exception handler?** Um único `@RestControllerAdvice` estendendo `ResponseEntityExceptionHandler`,
 com três famílias de tratamento: erros da aplicação, erros do framework e a rede de segurança para
-bugs. Controllers e services sem try/catch. → [cap. 05](05-tratamento-de-erros-no-spring-mvc.md)
+bugs. Controllers e services sem try/catch. → [cap. 05](05-tratamento-de-erros-no-spring-mvc.md) e
+[catálogo de patterns](12-catalogo-de-patterns.md)
 
 **Error code?** Identificador estável e semântico (`ORDER_NOT_FOUND`), um enum por contexto,
 catálogo central validado no startup. É o que o cliente usa para decidir; nunca muda de significado.
@@ -58,5 +66,5 @@ em todo erro. → [cap. 06](06-problem-details-rfc-9457.md)
 
 ## Ordem de leitura sugerida
 
-- **Com pressa:** este README → [04](04-http-status-codes.md) → [05](05-tratamento-de-erros-no-spring-mvc.md) → [11](11-checklist-e-anti-patterns.md).
+- **Com pressa:** este README → [04](04-http-status-codes.md) → [05](05-tratamento-de-erros-no-spring-mvc.md) → [12](12-catalogo-de-patterns.md) → [11](11-checklist-e-anti-patterns.md).
 - **Completo:** em ordem. Os capítulos 01–04 não dependem de Spring.
