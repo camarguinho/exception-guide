@@ -1,6 +1,8 @@
 # Roteiro de demos ao vivo
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Plano de workshop — 3 encontros de 2h](plano-de-workshop.md) | [↑ Material de ensino](README.md) | [Próximo: Exercícios com gabarito →](exercicios.md)
+<!-- nav:end -->
 
 Regra de ouro: **pergunte o resultado antes de rodar.** O valor da demo está na surpresa.
 
@@ -71,3 +73,9 @@ Pontos a mostrar:
 No `GlobalExceptionHandler`, comente a linha `enrich(problem, code);` dentro de `handleExceptionInternal`
 e rode `mvn test -Dtest=OrderApiErrorContractTest`. Vários testes falham (405, 404 de rota, JSON
 inválido). Ponto: **teste de contrato é o que impede regressão silenciosa.** Desfaça a alteração.
+
+---
+
+<!-- nav:start -->
+[← Anterior: Plano de workshop — 3 encontros de 2h](plano-de-workshop.md) | [↑ Material de ensino](README.md) | [Próximo: Exercícios com gabarito →](exercicios.md)
+<!-- nav:end -->

@@ -1,6 +1,8 @@
 # Kata de refatoração: o controller legado
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Exercícios com gabarito](exercicios.md) | [↑ Material de ensino](README.md) | [Próximo: Quiz — 20 perguntas →](quiz.md)
+<!-- nav:end -->
 
 **Formato:** grupos de 3, 35 minutos. 10 min para achar os problemas, 20 para propor a versão
 refatorada (no papel ou no projeto), 5 para apresentar.
@@ -163,3 +165,9 @@ O controller perdeu ~70% das linhas e ganhou um contrato consistente.
 - Qual desses problemas vocês já viram em produção? Qual foi o impacto?
 - Quais deles um teste de contrato teria pegado?
 - Quais o checklist do [cap. 11](../11-checklist-e-anti-patterns.md) pegaria no code review?
+
+---
+
+<!-- nav:start -->
+[← Anterior: Exercícios com gabarito](exercicios.md) | [↑ Material de ensino](README.md) | [Próximo: Quiz — 20 perguntas →](quiz.md)
+<!-- nav:end -->

@@ -1,6 +1,8 @@
 # Exercícios com gabarito
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Roteiro de demos ao vivo](roteiro-de-demos.md) | [↑ Material de ensino](README.md) | [Próximo: Kata de refatoração: o controller legado →](kata-refatoracao.md)
+<!-- nav:end -->
 
 Todos os exercícios são feitos **no próprio projeto**. Critério de pronto: `mvn test` verde, com
 um teste novo cobrindo o que você fez. Gabaritos escondidos: tente antes de abrir.
@@ -326,3 +328,9 @@ Respeite `Accept-Language`: `en` devolve título e detalhe em inglês; o padrão
 
 Ponto de discussão: o **code nunca é traduzido**, só o texto. É por isso que o cliente decide pelo code.
 </details>
+
+---
+
+<!-- nav:start -->
+[← Anterior: Roteiro de demos ao vivo](roteiro-de-demos.md) | [↑ Material de ensino](README.md) | [Próximo: Kata de refatoração: o controller legado →](kata-refatoracao.md)
+<!-- nav:end -->

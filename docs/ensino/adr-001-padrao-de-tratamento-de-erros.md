@@ -1,6 +1,8 @@
 # ADR-001 — Padrão de tratamento de erros nas APIs Spring Boot
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Debates e objeções](debates-e-objecoes.md) | [↑ Material de ensino](README.md)
+<!-- nav:end -->
 
 > Modelo pronto para o time adaptar. Ajuste os trechos marcados com ✏️ e registre no repositório de
 > decisões do time.
@@ -60,3 +62,9 @@ difíceis de diagnosticar por falta de correlação entre resposta e log.
 
 - Checklist do [cap. 11](../11-checklist-e-anti-patterns.md) no template de PR.
 - Testes de contrato no CI.
+
+---
+
+<!-- nav:start -->
+[← Anterior: Debates e objeções](debates-e-objecoes.md) | [↑ Material de ensino](README.md)
+<!-- nav:end -->

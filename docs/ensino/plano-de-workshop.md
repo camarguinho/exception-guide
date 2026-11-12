@@ -1,6 +1,8 @@
 # Plano de workshop — 3 encontros de 2h
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[↑ Material de ensino](README.md) | [Próximo: Roteiro de demos ao vivo →](roteiro-de-demos.md)
+<!-- nav:end -->
 
 Público: devs que já usam Spring Boot. Formato: presencial ou remoto, com o projeto clonado em cada máquina.
 Pré-requisito técnico: JDK 21, Maven, `mvn test` passando.
@@ -64,3 +66,9 @@ log-and-rethrow. Trazer para o encontro 3 (kata).
 - Nas primeiras semanas, revise pessoalmente os PRs que mexem em tratamento de erro.
 - Exercícios 8–10 como desafio para quem quiser se aprofundar.
 - Aplique o [quiz](quiz.md) completo depois de um mês para medir retenção.
+
+---
+
+<!-- nav:start -->
+[↑ Material de ensino](README.md) | [Próximo: Roteiro de demos ao vivo →](roteiro-de-demos.md)
+<!-- nav:end -->

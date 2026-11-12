@@ -1,6 +1,8 @@
 # Debates e objeções
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Quiz — 20 perguntas](quiz.md) | [↑ Material de ensino](README.md) | [Próximo: ADR-001 — Padrão de tratamento de erros nas APIs Spring Boot →](adr-001-padrao-de-tratamento-de-erros.md)
+<!-- nav:end -->
 
 As perguntas que **vão** aparecer quando você propuser o padrão ao time, com respostas fundamentadas.
 Cada resposta tem a posição recomendada **e** quando ela não se aplica: quem lidera precisa reconhecer
@@ -79,3 +81,9 @@ contrato marca `retryable`.
 
 O formato de erro é API pública e é a parte que mais quebra cliente sem ninguém perceber, porque
 quase nunca é testada. A demo 5 do roteiro mostra: uma linha removida no handler e ninguém notaria sem o teste.
+
+---
+
+<!-- nav:start -->
+[← Anterior: Quiz — 20 perguntas](quiz.md) | [↑ Material de ensino](README.md) | [Próximo: ADR-001 — Padrão de tratamento de erros nas APIs Spring Boot →](adr-001-padrao-de-tratamento-de-erros.md)
+<!-- nav:end -->

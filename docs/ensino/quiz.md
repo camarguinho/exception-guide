@@ -1,6 +1,8 @@
 # Quiz — 20 perguntas
 
-[← Material de ensino](README.md)
+<!-- nav:start -->
+[← Anterior: Kata de refatoração: o controller legado](kata-refatoracao.md) | [↑ Material de ensino](README.md) | [Próximo: Debates e objeções →](debates-e-objecoes.md)
+<!-- nav:end -->
 
 Use para revisão no fim de um encontro, avaliação depois de um mês, ou como banco de perguntas de
 entrevista. Respostas escondidas.
@@ -66,3 +68,9 @@ entrevista. Respostas escondidas.
 
 **20.** Num teste de erro, por que verificar o code e não a mensagem?
 <details><summary>Resposta</summary>A mensagem é para humanos e muda (redação, tradução). O code é contrato estável. Testar mensagem gera testes frágeis.</details>
+
+---
+
+<!-- nav:start -->
+[← Anterior: Kata de refatoração: o controller legado](kata-refatoracao.md) | [↑ Material de ensino](README.md) | [Próximo: Debates e objeções →](debates-e-objecoes.md)
+<!-- nav:end -->
